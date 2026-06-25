@@ -1,4 +1,9 @@
 package com.jobtracker.model;
 
-public class ApplicationStatus {
+public enum ApplicationStatus {
+    APPLIED,
+    INTERVIEWING,
+    OFFER,
+    REJECTED,
+    WITHDRAWN
 }
