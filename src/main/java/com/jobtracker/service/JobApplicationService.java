@@ -35,4 +35,21 @@ public class JobApplicationService {
         newApp.setUserDetail(currentUser);
         return jobApplicationRepository.save(newApp);
     }
+
+    public JobApplication updateJobApplication(Long id, JobApplication updatedData, User currentUser){
+        JobApplication existing = getJobApplicationById(id,currentUser);
+
+        existing.setCompanyName(updatedData.getCompanyName());
+        existing.setAppliedPosition(updatedData.getAppliedPosition());
+        existing.setDateApplied(updatedData.getDateApplied());
+        existing.setApplicationStatus(updatedData.getApplicationStatus());
+
+        return jobApplicationRepository.save(existing);
+    }
+
+    public void deleteJobApplication(Long id, User currentUser){
+        JobApplication existing = getJobApplicationById(id,currentUser);
+
+        jobApplicationRepository.delete(existing);
+    }
 }
