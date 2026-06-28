@@ -1,6 +1,8 @@
 package com.jobtracker.controller;
 
 
+import com.jobtracker.dto.JobApplicationRequestDTO;
+import com.jobtracker.dto.JobApplicationResponseDTO;
 import com.jobtracker.model.JobApplication;
 import com.jobtracker.model.User;
 import com.jobtracker.service.JobApplicationService;
@@ -19,28 +21,28 @@ public class JobApplicationController {
     }
 
     @GetMapping("/{id}")
-    public JobApplication getById(@PathVariable Long id){
+    public JobApplicationResponseDTO getById(@PathVariable Long id){
         User fakeUser = new User();
         fakeUser.setId(1L);
         return jobApplicationService.getJobApplicationById(id,fakeUser);
     }
 
     @GetMapping
-    public List<JobApplication> getAll(){
+    public List<JobApplicationResponseDTO> getAll(){
         User fakeUser = new User();
         fakeUser.setId(1L);
         return jobApplicationService.getAllForUser(fakeUser);
     }
 
     @PostMapping
-    public JobApplication create(@RequestBody JobApplication newApp){
+    public JobApplicationResponseDTO create(@RequestBody JobApplicationRequestDTO newApp){
         User fakeUser = new User();
         fakeUser.setId(1L);
         return jobApplicationService.createJobApplication(newApp,fakeUser);
     }
 
     @PutMapping("/{id}")
-    public JobApplication update(@PathVariable Long id,@RequestBody JobApplication updatedApp){
+    public JobApplicationResponseDTO update(@PathVariable Long id,@RequestBody JobApplicationRequestDTO updatedApp){
         User fakeUser = new User();
         fakeUser.setId(1L);
         return jobApplicationService.updateJobApplication(id,updatedApp,fakeUser);
