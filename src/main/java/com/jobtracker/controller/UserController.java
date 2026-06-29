@@ -4,6 +4,7 @@ package com.jobtracker.controller;
 import com.jobtracker.dto.LoginRequestDTO;
 import com.jobtracker.dto.LoginResponseDTO;
 import com.jobtracker.dto.RegisterRequestDTO;
+import com.jobtracker.dto.UserResponseDTO;
 import com.jobtracker.model.User;
 import com.jobtracker.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody RegisterRequestDTO requestDTO) {
+    public UserResponseDTO register(@RequestBody RegisterRequestDTO requestDTO) {
         return userService.register(requestDTO);
     }
 

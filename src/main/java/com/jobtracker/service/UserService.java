@@ -4,6 +4,7 @@ package com.jobtracker.service;
 import com.jobtracker.dto.LoginRequestDTO;
 import com.jobtracker.dto.LoginResponseDTO;
 import com.jobtracker.dto.RegisterRequestDTO;
+import com.jobtracker.dto.UserResponseDTO;
 import com.jobtracker.exception.EmailAlreadyExistsException;
 import com.jobtracker.exception.InvalidCredentialsException;
 import com.jobtracker.model.User;
@@ -26,7 +27,7 @@ public class UserService {
         this.jwtUtil = jwtUtil;
     }
 
-    public User register(RegisterRequestDTO requestDTO) {
+    public UserResponseDTO register(RegisterRequestDTO requestDTO) {
         if (userRepository.findByEmail(requestDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("Email already registered");
         }
@@ -37,7 +38,9 @@ public class UserService {
         user.setFirstName(requestDTO.getFirstName());
         user.setLastName(requestDTO.getLastName());
 
-        return userRepository.save(user);
+        User saved = userRepository.save(user);
+
+        return new UserResponseDTO(saved.getId(), saved.getEmail(), saved.getFirstName(), saved.getLastName());
     }
 
     public User getCurrentUser() {
@@ -58,4 +61,7 @@ public class UserService {
         String token = jwtUtil.generateToken(user.getEmail());
         return new LoginResponseDTO(token);
     }
+
+
+
 }
