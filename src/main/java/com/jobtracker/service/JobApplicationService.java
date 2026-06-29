@@ -3,10 +3,12 @@ package com.jobtracker.service;
 import com.jobtracker.dto.JobApplicationRequestDTO;
 import com.jobtracker.dto.JobApplicationResponseDTO;
 import com.jobtracker.exception.ApplicationNotFoundException;
+import com.jobtracker.exception.InvalidCredentialsException;
 import com.jobtracker.exception.UnauthorizedAccessException;
 import com.jobtracker.model.JobApplication;
 import com.jobtracker.model.User;
 import com.jobtracker.repository.JobApplicationRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
